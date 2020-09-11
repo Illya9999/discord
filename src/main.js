@@ -1,14 +1,15 @@
 const Command = require('./Structures/Command'),
 	CommandHandler = require('./CommandHandler'),
 	NetManager = require('./NetManager');
+
 window.lastHook = 0;
+
 class DiscordManager {
 	constructor() {
 		this.CommandHandler = new CommandHandler(this);
 		this.MessageManager;
 		let parserHandled = !1; 
 		this.run((a, b, c) => {
-			window.testaaa = c(6);
 			for (let i in c.c) {
 				let e = c.c[i].exports;
 				if (e?.default?.showToken) this.TokenManager = e.default;
@@ -42,4 +43,4 @@ class DiscordManager {
 		return this;
 	}
 }
-window.DiscordManager = new DiscordManager();
+module.exports = new DiscordManager();
