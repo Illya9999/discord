@@ -1,4 +1,4 @@
-const Command = require('./Command'),
+const Command = require('./Structures/Command'),
 	CommandHandler = require('./CommandHandler'),
 	NetManager = require('./NetManager');
 window.lastHook = 0;

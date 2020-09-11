@@ -1,6 +1,6 @@
-const Command = require('./Command'),
+const Command = require('./Structures/Command'),
 prefix = '.',
-Channel = require('./Channel');
+Channel = require('./Structures/Channel');
 const didYouMean = require('didyoumean2').default;
 
 module.exports = class CommandHandler {
