@@ -15,5 +15,9 @@
     "didyoumean2": "^4.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
+  },
+  "resolutions": {
+	"webpack/acorn": "^8.0.1",
+	"webpack/eslint-scope": "^5.1.0"
   }
 }
