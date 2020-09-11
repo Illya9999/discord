@@ -1,0 +1,16 @@
+{
+  "name": "illya-cord",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "build": "webpack-cli --config ./webpack.config.js -o ./dist/bundle.js",
+    "dev": "webpack-cli --mode development --config ./webpack.config.js -o ./dist/dev.js"
+  },
+  "author": "Illya",
+  "dependencies": {
+    "didyoumean2": "^4.1.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
