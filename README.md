@@ -30,7 +30,9 @@ Make commands require an author
 
 Make an extention and an injection script
 
-Make a visual indicator that shows it running
+Make a gui that can edit config (after making config command)
+
+Make some visual indicator to show its running after it first starts
 
 Make configarable with config command
 
@@ -39,3 +41,5 @@ Add regex filtering to commands
 Improve net manager to not make requests instead of sending them to localhost
 
 Make the commands not load the illya pfp from network and load it locally instead
+
+Add documentation
