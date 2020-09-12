@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production npm run dev",
+    "build": "cross-env NODE_ENV=production yarn run dev",
     "dev": "webpack-cli --config ./webpack.config.js"
   },
   "author": "Illya",
