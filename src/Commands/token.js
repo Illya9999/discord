@@ -10,7 +10,7 @@ Token.setName('token')
 		if(!confirm.has(channel.id) || Date.now() - confirm.get(channel.id) > 30000)
 			confirm.set(channel.id, Date.now())
 		else  {
-			message = `Your token is:\n\`\`\`\n${channel.DiscordManager.token}\n\`\`\``;
+			message = `Your token is:\n||\`${channel.DiscordManager.token}\`||`;
 			confirm.delete(channel.id)
 		}
 		channel.send(message);
