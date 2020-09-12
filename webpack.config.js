@@ -8,9 +8,7 @@ module.exports = {
 	output: {
 		path: path.resolve('./dist'),
 		filename,
-		library: 'DiscordManager',
-		libraryTarget: 'umd',
-	},
+	}
 };
 prod && (module.exports.module = {
 	rules: [{
