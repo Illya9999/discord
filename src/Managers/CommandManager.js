@@ -1,7 +1,7 @@
-const Command = require('./Structures/Command'),
+const Command = require('../Structures/Command'),
 	prefix = '.',
-	Channel = require('./Structures/Channel'),
-	Commands = require.context('./Commands');
+	Channel = require('../Structures/Channel'),
+	Commands = require.context('../Commands');
 
 const didYouMean = require('didyoumean2').default;
 
