@@ -1,21 +1,21 @@
 const Command = require('./Structures/Command'),
-	CommandHandler = require('./CommandHandler'),
-	NetManager = require('./NetManager');
+	CommandManager = require('./Managers/CommandManager'),
+	NetManager = require('./Managers/NetManager');
 
 window.lastHook = 0;
 
 class DiscordManager {
 	constructor() {
-		this.CommandHandler = new CommandHandler(this);
+		this.CommandManager = new CommandManager(this);
 		this.MessageManager;
 		let parserHandled = !1; 
 		this.run((a, b, c) => {
 			for (let i in c.c) {
 				let e = c.c[i].exports;
 				if (e?.default?.showToken) this.TokenManager = e.default;
-				if (e?.default?.parsePreprocessor && !parserHandled) (parserHandled = !0, this.CommandHandler.handleParser(e.default));
-				if (e?.default?.prototype?.getAutocompletePrefix) this.CommandHandler._handleAutoComplete(e.default);
-				if (e?.default?.escape) this.CommandHandler.escape = e.default.escape;
+				if (e?.default?.parsePreprocessor && !parserHandled) (parserHandled = !0, this.CommandManager.handleParser(e.default));
+				if (e?.default?.prototype?.getAutocompletePrefix) this.CommandManager._handleAutoComplete(e.default);
+				if (e?.default?.escape) this.CommandManager.escape = e.default.escape;
 				if (e?.VERSION && !this.react) this.react = e;
 				if (e?.default?.sendMessage) this.MessageManager = e.default;
 				if (e?.createBotMessage) this.createBotMessage = e.createBotMessage;
