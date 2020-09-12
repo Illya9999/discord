@@ -13,10 +13,12 @@ module.exports = class CommandHandler {
 		}}];*/
 		this.activeCommands = [];
 		this.commands = new Map();
+		this.aliases = new Map();
 		this.regex = new RegExp(`^(${this.activeCommands.map(cmd => cmd.name).join('|')})\\s(.+)`, 'i');
 		const helpCmd = new Command;
 		helpCmd.setName('help')
 			.setDescription('Displays help')
+			.addAlias('h')
 			.setExec(function(msgData, channel, content){
 				channel.send(`This is a test message\n**The date is:** ${(new Date).toDateString()}\n**The time is:** ${(new Date).toTimeString()}`);
 				return {};
@@ -76,6 +78,7 @@ module.exports = class CommandHandler {
 		}
 		UserCommands.queryResults = content => {
 			let P = this.activeCommands;
+			let me = this;
 			function toArray(arr, length) {
 				(null == length || length > arr.length) && (length = arr.length);
 				for (var index = 0, copied = new Array(length); index < length; index++) copied[index] = arr[index];
@@ -85,8 +88,9 @@ module.exports = class CommandHandler {
 				matchingCommands = [],
 				simular = [];
 			(0, this.DiscordManager.react)(P/*Commands array please set this*/).forEach((function (elem) {
-				(null == elem.predicate || elem.predicate(e)) && (escapedCommand.test(elem.command) ? matchingCommands.push(elem) : (didYouMean)(content, elem.command.toLowerCase()) && simular.push(elem))
+				(null == elem.predicate || elem.predicate(e)) && (escapedCommand.test(elem) ? matchingCommands.push(elem) : (didYouMean)(content, elem.name.toLowerCase()) && simular.push(elem))
 			}));
+			content == '' && (matchingCommands = matchingCommands.filter(e => !e.isAlias));
 			var queryResults = [],
 				c = function (e) {//6756
 					for (var iterator, n = function (cmd) {
@@ -128,8 +132,10 @@ module.exports = class CommandHandler {
 	addCommand(command){
 		if(!command.name || !(command instanceof Command)) return !1;
 		this.commands.set(command.name, command);
-		this.regex = new RegExp(`^(${[...this.commands.keys()].join('|')})\\s(.+)`, 'i');
-		this.activeCommands = [...this.commands.values()];
+		this.aliases.set(command.name, command);
+		command.aliases.forEach(e => !this.commands.has(e.name) && this.aliases.set(e.name, e));
+		this.regex = new RegExp(`^(${[...this.aliases.keys()].join('|')})\\s(.+)`, 'i');
+		this.activeCommands = [...this.aliases.values()];
 		return !0;
 	}
 }
