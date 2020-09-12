@@ -1,5 +1,5 @@
 module.exports = class NetManager {
-	constructor(DiscordManager, Endpoints){
+	constructor(DiscordManager, Endpoints) {
 		this.block = new Map();
 		this.endpoint = Endpoints.MESSAGE_ACK;
 		let me = this;
@@ -9,7 +9,7 @@ module.exports = class NetManager {
 		};
 		this.DiscordManager = DiscordManager;
 	}
-	add(channelID, msgID){
+	add(channelID, msgID) {
 		this.block.set(channelID+msgID, 1);
 	}
 }

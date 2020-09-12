@@ -34,7 +34,7 @@ class Command {
 		this.aliases.push(cmdAlias);
 		return this;
 	}
-	removeAlias(alias){
+	removeAlias(alias) {
 		if(!this.aliases.includes(alias)) return !1;
 		this.aliases.splice(this.aliases.indexOf(alias), 1);
 		return this;

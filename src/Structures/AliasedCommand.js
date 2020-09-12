@@ -4,10 +4,10 @@ module.exports = class AliasedCommand {
 		this.command = this.name = name;
 		this.isAlias = !0;
 	}
-	get run(){
+	get run() {
 		return this.base.run
 	}
-	get description(){
+	get description() {
 		return `(A) - ${this.base.description}`
 	}
 	get author() {

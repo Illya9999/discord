@@ -6,7 +6,7 @@ const Command = require('../Structures/Command'),
 const didYouMean = require('didyoumean2').default;
 
 module.exports = class CommandHandler {
-	constructor(Plugger){
+	constructor(Plugger) {
 		this.DiscordManager = Plugger;
 		this.activeCommands = [];
 		this.commands = new Map();
@@ -26,7 +26,7 @@ module.exports = class CommandHandler {
 		cmds.forEach(cmd => this.addCommand(Commands(cmd).default));
 		this._parse;
 	}
-	handleParser(parser){
+	handleParser(parser) {
 		const me = this;
 		this._parse = parser.parse;
 		window.parser = parser;
@@ -45,7 +45,7 @@ module.exports = class CommandHandler {
 			return x[0].run(msgData, channel, cleaned);
 		}
 	}
-	_handleAutoComplete(auto){
+	_handleAutoComplete(auto) {
 		let ogCompleteOptions = auto.prototype.getAutocompletePrefix,
 			me = this;
 		window.auto = auto;
@@ -55,7 +55,7 @@ module.exports = class CommandHandler {
 			return x
 		};
 	}
-	addCmdLoader(obj){
+	addCmdLoader(obj) {
 		let options = obj.state.autocompleteOptions;
 		let UserCommands = Object.assign({}, options.COMMAND);
 		UserCommands.matches = (prefix, command, n) => {
@@ -127,7 +127,7 @@ module.exports = class CommandHandler {
 	}
 	//commands = [];
 	//regex = /^(test)\s(.+)/;
-	addCommand(command){
+	addCommand(command) {
 		if(!command.name || !(command instanceof Command)) return !1;
 		this.commands.set(command.name, command);
 		this.aliases.set(command.name, command);

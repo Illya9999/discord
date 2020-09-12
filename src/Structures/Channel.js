@@ -6,7 +6,7 @@ module.exports = class Channel {
 		for (const key in channel)
 			channel.hasOwnProperty(key) && (this[key] = channel[key]);
 	}
-	send(content, editor = message=>message){
+	send(content, editor = message=>message) {
 		let msg = this.createBotMessage(this.id, content);
 		msg.author = {
 			id: '1',
