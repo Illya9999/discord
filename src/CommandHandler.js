@@ -1,6 +1,8 @@
 const Command = require('./Structures/Command'),
-prefix = '.',
-Channel = require('./Structures/Channel');
+	prefix = '.',
+	Channel = require('./Structures/Channel'),
+	Commands = require.context('./Commands');
+
 const didYouMean = require('didyoumean2').default;
 
 module.exports = class CommandHandler {
@@ -20,6 +22,8 @@ module.exports = class CommandHandler {
 				return {};
 			});
 		this.addCommand(helpCmd);
+		let cmds = Commands.keys().filter(e => e.endsWith('.js'));
+		cmds.forEach(cmd => this.addCommand(Commands(cmd).default));
 		this._parse;
 	}
 	handleParser(parser){
