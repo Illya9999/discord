@@ -27,3 +27,15 @@ Make help command show help and details about commands
 Make imporve command api with typed argument support
 
 Make commands require an author
+
+Make an extention and an injection script
+
+Make a visual indicator that shows it running
+
+Make configarable with config command
+
+Add regex filtering to commands
+
+Improve net manager to not make requests instead of sending them to localhost
+
+Make the commands not load the illya pfp from network and load it locally instead
