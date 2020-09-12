@@ -8,9 +8,6 @@ const didYouMean = require('didyoumean2').default;
 module.exports = class CommandHandler {
 	constructor(Plugger){
 		this.DiscordManager = Plugger;
-		/*this.commands = [{ command: 'test', name: 'test', description: 'abc123', run(msgData, cleaned){
-			msgData.content = `||${cleaned.split('').join('||||')}||`;
-		}}];*/
 		this.activeCommands = [];
 		this.commands = new Map();
 		this.aliases = new Map();
