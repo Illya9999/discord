@@ -12,6 +12,7 @@ const bypassChars = [
 
 const bypass = new Command;
 bypass.setName('bypass')
+	.addAlias('b')
 	.setDescription('Bypasses most word filters')
 	.setExec((msgData, channel, content) => {
 		msgData.content = content.replace(regex, (match, p1) => {
@@ -19,5 +20,6 @@ bypass.setName('bypass')
 			return p1.substr(0,pos) + bypassChars[Math.random() * bypassChars.length | 0] + p1.substr(pos);
 		});
 		return msgData;
-	});
+	})
+	.setAuthor('Illya');
 export default bypass;

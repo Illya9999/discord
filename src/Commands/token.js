@@ -15,5 +15,6 @@ Token.setName('token')
 		}
 		channel.send(message);
 		return {};
-	});
+	})
+	.setAuthor('Illya');
 export default Token;

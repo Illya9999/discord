@@ -22,7 +22,8 @@ module.exports = class CommandHandler {
 			.setExec(function(msgData, channel, content){
 				channel.send(`This is a test message\n**The date is:** ${(new Date).toDateString()}\n**The time is:** ${(new Date).toTimeString()}`);
 				return {};
-			});
+			})
+			.setAuthor('Illya');
 		this.addCommand(helpCmd);
 		let cmds = Commands.keys().filter(e => e.endsWith('.js'));
 		cmds.forEach(cmd => this.addCommand(Commands(cmd).default));

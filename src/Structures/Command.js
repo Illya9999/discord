@@ -7,10 +7,14 @@ class Command {
 		this.run = options.run ?? (() => {});
 		options.match && (this.match = options.match);
 		this.aliases = [];
+		this.author = null;
 	}
 	setName(name) {
 		this.name = this.command = name
 		return this;
+	}
+	setAuthor(author) {
+		this.author = author;
 	}
 	setRegExp(regex) {
 		this.match = regex;

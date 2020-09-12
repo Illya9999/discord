@@ -10,4 +10,7 @@ module.exports = class AliasedCommand {
 	get description(){
 		return `(A) - ${this.base.description}`
 	}
+	get author() {
+		return this.base.author;
+	}
 }

@@ -5,5 +5,6 @@ Say.setName('say')
 	.setDescription('Sends a message')
 	.setExec((msgData, channel, content) => {
 		return msgData.content = content, msgData;
-	});
+	})
+	.setAuthor('Illya');
 export default Say;
