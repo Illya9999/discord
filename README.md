@@ -19,3 +19,11 @@ Paste the script into console or use tampermonkey
 You can verify it is running by typing `.help` into chat
 
 I will eventually make an injection script for the desktop app and possibly and extention for the webapp
+
+## TODO
+
+Make help command show help and details about commands
+
+Make imporve command api with typed argument support
+
+Make commands require an author
