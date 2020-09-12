@@ -4,8 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "build": "webpack-cli --mode production --config ./webpack.production.js -o ./dist/bundle.js",
-    "dev": "webpack-cli --mode development --config ./webpack.config.js"
+    "build": "cross-env NODE_ENV=production npm run dev",
+    "dev": "webpack-cli --config ./webpack.config.js"
   },
   "author": "Illya",
   "dependencies": {
@@ -17,7 +17,10 @@
     "webpack-cli": "^3.3.12"
   },
   "resolutions": {
-	"webpack/acorn": "^8.0.1",
-	"webpack/eslint-scope": "^5.1.0"
+    "webpack/acorn": "^8.0.1",
+    "webpack/eslint-scope": "^5.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2"
   }
 }
