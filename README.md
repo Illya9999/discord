@@ -1,6 +1,6 @@
 # illya-cord
 
-A simple discord client mod for both the web and browser clients!
+A simple discord client mod for both the web and dekstop clients!
 
 ## Installation
 
