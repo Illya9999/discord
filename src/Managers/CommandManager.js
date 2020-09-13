@@ -13,6 +13,7 @@ module.exports = class CommandHandler {
 		this.aliases = new Map();
 		this.regex = new RegExp(`^(${this.activeCommands.map(cmd => cmd.name).join('|')})\\s(.+)`, 'i');
 		const helpCmd = new Command;
+		this.format = a=>a;
 		let me = this;
 		helpCmd.setName('help')
 			.setDescription('Displays help')
@@ -42,7 +43,7 @@ module.exports = class CommandHandler {
 		window.parser = parser;
 		parser.parse = function(channel, content, n, isSend) {
 			let msgData = me._parse(channel, content, n, isSend);
-			if (isSend !== void 0 || !msgData.content?.trim()?.startsWith(prefix)) return msgData;
+			if (isSend !== void 0 || !msgData.content?.trim()?.startsWith(prefix)) return me.format(msgData, isSend);
 			let msg = msgData.content,
 				args = msg.trim().substr(prefix.length).split(/\s+/g),
 				cmd = args.shift().toLowerCase(),
@@ -69,7 +70,6 @@ module.exports = class CommandHandler {
 		let options = obj.state.autocompleteOptions;
 		let UserCommands = Object.assign({}, options.COMMAND);
 		UserCommands.matches = (prefix, command, n) => {
-			console.log(prefix, command)
 			return n && ('.' === prefix/* || null != command.match(this.regex)*/)
 		};
 		UserCommands.getPlainText = (name, data) => {

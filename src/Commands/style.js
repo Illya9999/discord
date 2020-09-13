@@ -1,7 +1,6 @@
 import Command from '../Structures/Command';
 
 const styles = [
-    "Normal",
     "𝐁𝐨𝐥𝐝",
     "𝘐𝘵𝘢𝘭𝘪𝘤",
     "𝘽𝙤𝙡𝙙 - 𝙄𝙩𝙖𝙡𝙞𝙘",
@@ -34,18 +33,30 @@ let letters = [
     ["ᴀ", "ʙ", "ᴄ", "ᴅ", "ᴇ", "ғ", "ɢ", "ʜ", "ɪ", "ᴊ", "ᴋ", "ʟ", "ᴍ", "ɴ", "ᴏ", "ᴘ", "ǫ", "ʀ", "s", "ᴛ", "ᴜ", "ᴠ", "ᴡ", "x", "ʏ", "ᴢ", "ᴀ", "ʙ", "ᴄ", "ᴅ", "ᴇ", "ғ", "ɢ", "ʜ", "ɪ", "ᴊ", "ᴋ", "ʟ", "ᴍ", "ɴ", "ᴏ", "ᴘ", "ǫ", "ʀ", "s", "ᴛ", "ᴜ", "ᴠ", "ᴡ", "x", "ʏ", "ᴢ"],
     ["ᗩ", "ᗷ", "ᑕ", "ᗪ", "E", "ᖴ", "G", "ᕼ", "I", "ᒍ", "K", "ᒪ", "ᗰ", "ᑎ", "O", "ᑭ", "ᑫ", "ᖇ", "ᔕ", "T", "ᑌ", "ᐯ", "ᗯ", "᙭", "Y", "ᘔ", "ᗩ", "ᗷ", "ᑕ", "ᗪ", "E", "ᖴ", "G", "ᕼ", "I", "ᒍ", "K", "ᒪ", "ᗰ", "ᑎ", "O", "ᑭ", "ᑫ", "ᖇ", "ᔕ", "T", "ᑌ", "ᐯ", "ᗯ", "᙭", "Y", "ᘔ"],
 ];
-
+let mode = 100;
+let enabled = 1;
+let format = (msgData, isSend) => {
+	if(enabled || isSend !== void 0) return msgData;
+	let content = msgData.content;
+	let m = mode > styles.length || isNaN(mode) ? Math.random() * styles.length | 0 : mode;
+	for(let i = 0; i < alphabet.length; i++){
+		content = content.replaceAll(alphabet[i], letters[m][i])
+	}
+	msgData.content = content;
+	return msgData;
+}
 const style = new Command;
 style.setName('style')
-	//.addAlias('b')
 	.setDescription('Makes your words styled nicely')
 	.setExec((msgData, channel, content) => {
-		let style = Math.random() * letters.length | 0;
-		for(let i = 0; i < alphabet.length; i++){
-			content = content.replaceAll(alphabet[i], letters[style][i])
+		channel.DiscordManager.CommandManager.format = format;
+		if(content == '')
+			channel.send(`Style has been: **${!(enabled ^= 1) ? 'en' : 'dis'}abled**!`);
+		else {
+			mode = parseInt(content);
+			channel.send(`Mode has been changed to: **${styles[mode] || 'RANDOM'}**`);
 		}
-		msgData.content = content
-		return msgData;
+		return {};
 	})
 	.setAuthor('Illya');
 export default style;
