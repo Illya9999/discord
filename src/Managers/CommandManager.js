@@ -13,11 +13,22 @@ module.exports = class CommandHandler {
 		this.aliases = new Map();
 		this.regex = new RegExp(`^(${this.activeCommands.map(cmd => cmd.name).join('|')})\\s(.+)`, 'i');
 		const helpCmd = new Command;
+		let me = this;
 		helpCmd.setName('help')
 			.setDescription('Displays help')
 			.addAlias('h')
 			.setExec(function(msgData, channel, content){
-				channel.send(`This is a test message\n**The date is:** ${(new Date).toDateString()}\n**The time is:** ${(new Date).toTimeString()}`);
+				channel.send(
+					`**Illya-cord** v${VERSION}\n` +
+					'Commands:```\n' + 
+					[...me.commands.keys()].reduce((all,one,i) => {
+						const ch = i / 4 | 0;
+						all[ch] = [].concat((all[ch]||[]),one); 
+						return all
+					}, []).map(e => e.join('\t')).join('\n') +
+					'\n```'	
+				);
+				//channel.send(`This is a test message\n**The date is:** ${(new Date).toDateString()}\n**The time is:** ${(new Date).toTimeString()}`);
 				return {};
 			})
 			.setAuthor('Illya');
