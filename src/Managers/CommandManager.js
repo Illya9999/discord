@@ -28,7 +28,6 @@ module.exports = class CommandHandler {
 					}, []).map(e => e.join('\t')).join('\n') +
 					'\n```'	
 				);
-				//channel.send(`This is a test message\n**The date is:** ${(new Date).toDateString()}\n**The time is:** ${(new Date).toTimeString()}`);
 				return {};
 			})
 			.setAuthor('Illya');
@@ -70,7 +69,8 @@ module.exports = class CommandHandler {
 		let options = obj.state.autocompleteOptions;
 		let UserCommands = Object.assign({}, options.COMMAND);
 		UserCommands.matches = (prefix, command, n) => {
-			return n && ('.' === prefix || null != command.match(this.regex))
+			console.log(prefix, command)
+			return n && ('.' === prefix/* || null != command.match(this.regex)*/)
 		};
 		UserCommands.getPlainText = (name, data) => {
 			let commands = data.commands,
@@ -97,7 +97,7 @@ module.exports = class CommandHandler {
 				matchingCommands = [],
 				simular = [];
 			(0, this.DiscordManager.react)(P/*Commands array please set this*/).forEach((function (elem) {
-				(null == elem.predicate || elem.predicate(e)) && (escapedCommand.test(elem) ? matchingCommands.push(elem) : (didYouMean)(content, elem.name.toLowerCase()) && simular.push(elem))
+				(null == elem.predicate || elem.predicate(e)) && (escapedCommand.test(elem.name) ? matchingCommands.push(elem) : (didYouMean)(content, elem.name.toLowerCase()) && simular.push(elem))
 			}));
 			content == '' && (matchingCommands = matchingCommands.filter(e => !e.isAlias));
 			var queryResults = [],
@@ -143,7 +143,7 @@ module.exports = class CommandHandler {
 		this.commands.set(command.name, command);
 		this.aliases.set(command.name, command);
 		command.aliases.forEach(e => !this.commands.has(e.name) && this.aliases.set(e.name, e));
-		this.regex = new RegExp(`^(${[...this.aliases.keys()].join('|')})\\s(.+)`, 'i');
+		this.regex = new RegExp(`^(${[...this.aliases.keys()].join('|')})`, 'i');
 		this.activeCommands = [...this.aliases.values()];
 		return !0;
 	}
