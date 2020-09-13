@@ -25,6 +25,9 @@ class DiscordManager {
 		this.TokenManager.showToken();
 		this.Command = Command;
 	}
+	get version() {
+		return VERSION;
+	}
 	get token() {
 		return this.TokenManager.getToken();
 	}
@@ -43,4 +46,4 @@ class DiscordManager {
 		return this;
 	}
 }
-module.exports = new DiscordManager();
+window.DiscordManager = new DiscordManager();

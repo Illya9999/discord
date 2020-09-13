@@ -1,5 +1,6 @@
 const prod = process.env.NODE_ENV === 'production';
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 const filename = `${prod ? 'bundle' : 'dev'}.js`;
 
 module.exports = {
@@ -8,7 +9,12 @@ module.exports = {
 	output: {
 		path: path.resolve('./dist'),
 		filename,
-	}
+	},
+	plugins: [
+		new DefinePlugin({
+			VERSION: JSON.stringify(require("./package.json").version + (prod ? '' : '-dev'))
+		})
+	]
 };
 prod && (module.exports.module = {
 	rules: [{
