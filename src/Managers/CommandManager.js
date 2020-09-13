@@ -86,8 +86,6 @@ module.exports = class CommandHandler {
 			}
 		}
 		UserCommands.queryResults = content => {
-			let P = this.activeCommands;
-			let me = this;
 			function toArray(arr, length) {
 				(null == length || length > arr.length) && (length = arr.length);
 				for (var index = 0, copied = new Array(length); index < length; index++) copied[index] = arr[index];
@@ -96,7 +94,7 @@ module.exports = class CommandHandler {
 			var escapedCommand = new RegExp(`^${this.escape(content)}`, "i"),
 				matchingCommands = [],
 				simular = [];
-			(0, this.DiscordManager.react)(P/*Commands array please set this*/).forEach((function (elem) {
+			(0, this.DiscordManager.react)(this.activeCommands).forEach((function (elem) {
 				(null == elem.predicate || elem.predicate(e)) && (escapedCommand.test(elem.name) ? matchingCommands.push(elem) : (didYouMean)(content, elem.name.toLowerCase()) && simular.push(elem))
 			}));
 			content == '' && (matchingCommands = matchingCommands.filter(e => !e.isAlias));
